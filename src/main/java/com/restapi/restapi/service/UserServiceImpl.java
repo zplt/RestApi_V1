@@ -2,6 +2,7 @@ package com.restapi.restapi.service;
 
 import com.restapi.restapi.dao.UserRepository;
 import com.restapi.restapi.entity.User;
+import com.restapi.restapi.rest.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService{
         if (result.isPresent()){
             theUser=result.get();
         }else {
-            throw  new RuntimeException("Did not find user id - " + id);
+            throw  new UserNotFoundException("Did not find user id - " + id);
         }
         return theUser;
     }

@@ -1,8 +1,11 @@
 package com.restapi.restapi.rest;
 
 import com.restapi.restapi.entity.User;
+import com.restapi.restapi.entity.UserErrorResponse;
 import com.restapi.restapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,5 +44,6 @@ public class UserRestController {
         userService.deleteById(id);
         return "User removed from record";
     }
+
 
 }
