@@ -1,5 +1,6 @@
 package com.restapi.restapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,8 +24,10 @@ public class UserRole {
     @Column(name = "level")
     private float level;
     @Column(name = "inserttime")
+    @JsonIgnore
     private int inserttime;
     @Column(name = "updatetime")
+    @JsonIgnore
     private int updatetime;
 
     public UserRole(String name, String permissions, String status, float level, int inserttime, int updatetime) {

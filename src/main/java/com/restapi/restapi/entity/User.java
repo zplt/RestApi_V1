@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 @Data
@@ -50,7 +52,16 @@ public class User {
     private int inserttime;
 
     @Column(name = "updatetime")
+    @JsonIgnore
     private int updatetime;
+
+    /*
+    if you wanna get user and his/her role(s)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private List<UserRole> userRoles;
+    */
+
 
     public User(String h_no, int sicil_no, String username, String password, String firstname, String lastname, int role_id, String status, String attributes, int inserttime, int updatetime) {
         this.h_no = h_no;
