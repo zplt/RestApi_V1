@@ -1,5 +1,6 @@
 package com.restapi.restapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,9 +22,11 @@ public class User {
     private int sicil_no;
 
     @Column(name = "username")
+    @JsonIgnore
     private String username;
 
     @Column(name = "password")
+    @JsonIgnore
     private String password;
 
     @Column(name = "firstname")
@@ -39,9 +42,11 @@ public class User {
     private String status;
 
     @Column(name = "attributes")
+    @JsonIgnore
     private String attributes;
 
     @Column(name = "inserttime")
+    @JsonIgnore
     private int inserttime;
 
     @Column(name = "updatetime")
