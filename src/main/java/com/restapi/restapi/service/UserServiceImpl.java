@@ -4,7 +4,10 @@ import com.restapi.restapi.dao.UserRepository;
 import com.restapi.restapi.entity.User;
 import com.restapi.restapi.rest.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -20,8 +23,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<User> findAllUser() {
-        return userService.findAll();
+    public Page<User> findAllUser(Pageable pageable) {
+        return userService.findAll(pageable);
     }
 
     @Override
