@@ -16,4 +16,6 @@ public interface UserService {
 
     void deleteById(Integer id);
 
+    List<User> QueryDsl();
+
 }

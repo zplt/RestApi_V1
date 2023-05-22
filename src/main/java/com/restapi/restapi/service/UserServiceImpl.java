@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService{
         if (result.isPresent()){
             theUser=result.get();
         }else {
-            throw  new UserNotFoundException("Did not find user id - " + id);
+            throw  new UserNotFoundException("Did not find user with the id - " + id);
         }
         return theUser;
     }
@@ -47,5 +47,13 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteById(Integer id) {
         userService.deleteById(id);
+    }
+
+    @Override
+    public List<User> QueryDsl() {
+       //Working on it
+        //be patient
+
+        return null;
     }
 }
