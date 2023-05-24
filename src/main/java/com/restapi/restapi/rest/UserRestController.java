@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api_v1")
+@RequestMapping("/api/user")
 public class UserRestController {
 
     private UserService userService;
@@ -27,7 +27,13 @@ public class UserRestController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
+    //Catch'e gerek yok, global exception handler yazıldı.
+    //Response için dto yazılması gerekli.
+    //getAll yerine search metodu yazılmalı. Ve belli kriterlere göre arama yapılmalı.
+    //Pagination için pageable sınıfı kullanılabilir
+    //Request parametreleri için dto yazılmalı.
+    //Swagger ile endpoint dokümantasyonu yapılmalı.
+    @GetMapping("")
     public ResponseEntity<Map<String,Object>> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size){
         try {
             List<User> users= new ArrayList<>();
@@ -46,19 +52,26 @@ public class UserRestController {
         }
     }
 
-    @GetMapping("/users/{userId}")
-    public User getById(@PathVariable("userId") int id){
+    //User entity'si yerine UserResponseDto yazılmalı.
+    @GetMapping("/{userId}")
+    public User getById(@PathVariable("userId") int id) {
         User user=userService.findById(id);
         return  user;
     }
 
-    @PostMapping("/users")
+    //Başarılı işlemde String döndürmek yerine standart bir body belirlenebilir.
+    // {
+    //   "success": true,
+    //   "message": "İşlem Başarılı"
+    // }
+    @PostMapping("")
     public String saveUser(@RequestBody User user){
         User theUser=userService.save(user);
         return "User saved -id " + theUser.getId();
     }
 
-    @DeleteMapping("/users/{userId}")
+    //Başarılı işlemde String döndürmek yerine standart bir body belirlenebilir.
+    @DeleteMapping("/{userId}")
     public String deletUser(@PathVariable("userId") int id) {
         userService.deleteById(id);
         return "User removed from record";

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api_v2")
+@RequestMapping("/api/userRole")
 public class UserRoleRestController {
 
     private UserRoleService userRoleService;
@@ -19,25 +19,25 @@ public class UserRoleRestController {
         this.userRoleService = userRoleService;
     }
 
-    @GetMapping("/userRoles")
+    @GetMapping("")
     public List<UserRole> getAll(){
         List<UserRole> userRoles= userRoleService.findAllUser();
         return userRoles;
     }
 
-    @GetMapping("/userRoles/{userRoleId}")
+    @GetMapping("/{userRoleId}")
     public UserRole getById(@PathVariable("userRoleId") int id){
         UserRole userRole=userRoleService.findById(id);
         return  userRole;
     }
 
-    @PostMapping("/userRoles")
+    @PostMapping("")
     public String saveUser(@RequestBody UserRole userRole){
         UserRole theUserRole=userRoleService.save(userRole);
         return "UserRole saved -id " + theUserRole.getId();
     }
 
-    @DeleteMapping("/userRoles/{userRoleId}")
+    @DeleteMapping("/{userRoleId}")
     public String deletUser(@PathVariable("userRoleId") int id) {
         userRoleService.deleteById(id);
         return "UserRole removed from record";

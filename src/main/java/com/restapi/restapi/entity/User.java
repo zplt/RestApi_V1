@@ -1,11 +1,16 @@
 package com.restapi.restapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "users")
@@ -48,11 +53,12 @@ public class User {
     private String attributes;
 
     @Column(name = "inserttime")
-    @JsonIgnore
+    @CreationTimestamp
     private int inserttime;
 
     @Column(name = "updatetime")
     @JsonIgnore
+    @UpdateTimestamp
     private int updatetime;
 
     /*
@@ -63,6 +69,8 @@ public class User {
     */
 
 
+    //Lombok kütüphanesi ile constructor oluşturmak için @RequiredArgsConstructor kullanılabilir
+    //inserttime ve updatetime değerlerinin otomatik değiştirilmesi için CreationTimestamp, UpdateTimestamp anotionları kullanılabilir
     public User(String h_no, int sicil_no, String username, String password, String firstname, String lastname, int role_id, String status, String attributes, int inserttime, int updatetime) {
         this.h_no = h_no;
         this.sicil_no = sicil_no;
