@@ -32,8 +32,8 @@ create table user_roles
 )
     comment 'System user roles' charset = utf8;
 
-insert into user_roles (id, name, permissions, status, level, inserttime, updatetime) values (1, 'ADMIN', '', 'active', 1, 1675239749, 1675239749);
-insert into user_roles (id, name, permissions, status, level, inserttime, updatetime) values (2, 'BASMUDURLUK VKT', '', 'active', 2, 1675239749, 1675239749);
-insert into user_roles (id, name, permissions, status, level, inserttime, updatetime) values (3, 'MERKEZ VKT', '', 'active', 3, 1675239749, 1675239749);
-insert into user_roles (id, name, permissions, status, level, inserttime, updatetime) values (4, 'GİŞE PERSONELİ', '', 'active', 4, 1675239749, 1675239749);
-insert into user_roles (id, name, permissions, status, level, inserttime, updatetime) values (8, 'ÇAĞRI MERKEZİ', '', 'active', 10, 1675239749, 1675239749);
+insert into user_roles (id, name, permissions, status, level, inserttime, updatetime) values (1, 'ADMIN', '', 'active', 1);
+insert into user_roles (id, name, permissions, status, level, inserttime, updatetime) values (2, 'BASMUDURLUK VKT', '', 'active', 2);
+insert into user_roles (id, name, permissions, status, level, inserttime, updatetime) values (3, 'MERKEZ VKT', '', 'active', 3);
+insert into user_roles (id, name, permissions, status, level, inserttime, updatetime) values (4, 'GİŞE PERSONELİ', '', 'active', 4);
+insert into user_roles (id, name, permissions, status, level, inserttime, updatetime) values (8, 'ÇAĞRI MERKEZİ', '', 'active', 10);

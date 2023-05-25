@@ -6,15 +6,11 @@ spring:
     url: jdbc:mysql://localhost:3306/userdb
     username: hbstudent
     password: hbstudent
-  main:
-    banner-mode: off
-
-#
-#Hikari Configuration Properties
-#
+  #
+  #Hikari Configuration Properties
+  #
   hikari:
     connectionTimeout:
     idleTimeout:
     maxLifetime:
     maximum-pool-size:
-

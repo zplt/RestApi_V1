@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "user_roles")
@@ -25,17 +29,11 @@ public class UserRole {
     private float level;
     @Column(name = "inserttime")
     @JsonIgnore
-    private int inserttime;
+    @CreationTimestamp
+    private Date inserttime;
     @Column(name = "updatetime")
     @JsonIgnore
-    private int updatetime;
+    @UpdateTimestamp
+    private Date updatetime;
 
-    public UserRole(String name, String permissions, String status, float level, int inserttime, int updatetime) {
-        this.name = name;
-        this.permissions = permissions;
-        this.status = status;
-        this.level = level;
-        this.inserttime = inserttime;
-        this.updatetime = updatetime;
-    }
 }

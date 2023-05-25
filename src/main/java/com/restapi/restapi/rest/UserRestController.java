@@ -1,7 +1,6 @@
 package com.restapi.restapi.rest;
 
 import com.restapi.restapi.entity.User;
-import com.restapi.restapi.entity.UserErrorResponse;
 import com.restapi.restapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "users")
 @Data
@@ -54,12 +56,12 @@ public class User {
 
     @Column(name = "inserttime")
     @CreationTimestamp
-    private int inserttime;
+    private Date inserttime;
 
     @Column(name = "updatetime")
     @JsonIgnore
     @UpdateTimestamp
-    private int updatetime;
+    private Date updatetime;
 
     /*
     if you wanna get user and his/her role(s)
@@ -68,20 +70,11 @@ public class User {
     private List<UserRole> userRoles;
     */
 
-
-    //Lombok kütüphanesi ile constructor oluşturmak için @RequiredArgsConstructor kullanılabilir
-    //inserttime ve updatetime değerlerinin otomatik değiştirilmesi için CreationTimestamp, UpdateTimestamp anotionları kullanılabilir
-    public User(String h_no, int sicil_no, String username, String password, String firstname, String lastname, int role_id, String status, String attributes, int inserttime, int updatetime) {
-        this.h_no = h_no;
-        this.sicil_no = sicil_no;
-        this.username = username;
-        this.password = password;
+    public User(int id, String firstname, String lastname,  String status) {
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.role_id = role_id;
         this.status = status;
-        this.attributes = attributes;
-        this.inserttime = inserttime;
-        this.updatetime = updatetime;
     }
 }
