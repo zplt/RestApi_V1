@@ -1,7 +1,6 @@
 package com.restapi.restapi.rest;
 
-import com.restapi.restapi.entity.User;
-import com.restapi.restapi.entity.UserRole;
+import com.restapi.restapi.model.entity.UserRole;
 import com.restapi.restapi.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

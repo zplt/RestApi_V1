@@ -1,6 +1,7 @@
 package com.restapi.restapi.rest;
 
-import com.restapi.restapi.entity.User;
+import com.restapi.restapi.model.dto.UserDTO;
+import com.restapi.restapi.model.entity.User;
 import com.restapi.restapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,7 +38,7 @@ public class UserRestController {
         try {
             List<User> users= new ArrayList<>();
             Pageable paging= PageRequest.of(page, size);
-            Page<User> pageUser=userService.findAllUser(paging);
+            Page<UserDTO> pageUser=userService.findAllUser(paging);
             users=pageUser.getContent();
             Map<String,Object> response=new HashMap<>();
             response.put("users",users);

@@ -1,7 +1,6 @@
 package com.restapi.restapi.service;
 
-import com.restapi.restapi.entity.User;
-import com.restapi.restapi.entity.UserRole;
+import com.restapi.restapi.model.entity.UserRole;
 
 import java.util.List;
 

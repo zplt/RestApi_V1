@@ -1,4 +1,4 @@
-package com.restapi.restapi.entity;
+package com.restapi.restapi.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
@@ -31,11 +31,10 @@ public class User {
     private int sicil_no;
 
     @Column(name = "username")
-    @JsonIgnore
     private String username;
 
     @Column(name = "password")
-    @JsonIgnore
+
     private String password;
 
     @Column(name = "firstname")
@@ -51,7 +50,6 @@ public class User {
     private String status;
 
     @Column(name = "attributes")
-    @JsonIgnore
     private String attributes;
 
     @Column(name = "inserttime")
@@ -59,7 +57,6 @@ public class User {
     private Date inserttime;
 
     @Column(name = "updatetime")
-    @JsonIgnore
     @UpdateTimestamp
     private Date updatetime;
 
@@ -70,11 +67,16 @@ public class User {
     private List<UserRole> userRoles;
     */
 
-    public User(int id, String firstname, String lastname,  String status) {
-        this.id = id;
+    public User(String h_no, int sicil_no, String username, String password, String firstname, String lastname, int role_id, String status, String attributes) {
+        this.h_no = h_no;
+        this.sicil_no = sicil_no;
+        this.username = username;
+        this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
         this.role_id = role_id;
         this.status = status;
+        this.attributes = attributes;
     }
+
 }

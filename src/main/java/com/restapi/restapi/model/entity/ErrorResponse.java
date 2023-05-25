@@ -1,4 +1,4 @@
-package com.restapi.restapi.entity;
+package com.restapi.restapi.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

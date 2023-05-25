@@ -1,4 +1,4 @@
-package com.restapi.restapi.entity;
+package com.restapi.restapi.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
