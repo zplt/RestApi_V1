@@ -1,5 +1,6 @@
 package com.restapi.restapi.rest;
 
+import com.restapi.restapi.model.dto.ResponseDTO;
 import com.restapi.restapi.model.dto.UserDTO;
 import com.restapi.restapi.model.entity.User;
 import com.restapi.restapi.service.UserService;
@@ -38,7 +39,7 @@ public class UserRestController {
         try {
             List<User> users= new ArrayList<>();
             Pageable paging= PageRequest.of(page, size);
-            Page<UserDTO> pageUser=userService.findAllUser(paging);
+            Page<User> pageUser=userService.findAllUser(paging);
             users=pageUser.getContent();
             Map<String,Object> response=new HashMap<>();
             response.put("users",users);
@@ -52,11 +53,11 @@ public class UserRestController {
         }
     }
 
-    //User entity'si yerine UserResponseDto yazılmalı.
+
     @GetMapping("/{userId}")
-    public User getById(@PathVariable("userId") int id) {
-        User user=userService.findById(id);
-        return  user;
+    public ResponseEntity<UserDTO> getById(@PathVariable("userId") int id) {
+        UserDTO userDTO=userService.findById(id);
+        return  new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
     }
 
     //Başarılı işlemde String döndürmek yerine standart bir body belirlenebilir.
@@ -65,9 +66,18 @@ public class UserRestController {
     //   "message": "İşlem Başarılı"
     // }
     @PostMapping("")
-    public String saveUser(@RequestBody User user){
+    public ResponseEntity<ResponseDTO> saveUser(@RequestBody User user){
+        ResponseDTO responseDTO=new ResponseDTO();
         User theUser=userService.save(user);
-        return "User saved -id " + theUser.getId();
+        if (!(theUser==null)){
+            responseDTO.setMessage("İşlem Başarılı");
+            responseDTO.setSuccess(true);
+            return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK) ;
+        }else {
+            responseDTO.setMessage("İşlem Başarısız");
+            responseDTO.setSuccess(false);
+            return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.BAD_REQUEST) ;
+        }
     }
 
     //Başarılı işlemde String döndürmek yerine standart bir body belirlenebilir.

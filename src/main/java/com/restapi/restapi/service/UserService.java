@@ -8,9 +8,9 @@ import org.springframework.data.domain.Pageable;
 public interface UserService {
 
     //Updated with UserDTO
-    Page<UserDTO> findAllUser(Pageable pageable);
+    Page<User> findAllUser(Pageable pageable);
 
-    User findById(Integer id);
+    UserDTO findById(Integer id);
 
     User save(User theUser);
 

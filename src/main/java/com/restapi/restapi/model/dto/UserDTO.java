@@ -10,10 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserDTO {
 
-    private int sicil_no;
     private String username;
     private String firstname;
     private String lastname;
-    private String status;
 
 }
