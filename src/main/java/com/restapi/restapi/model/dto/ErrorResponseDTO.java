@@ -1,4 +1,4 @@
-package com.restapi.restapi.model.entity;
+package com.restapi.restapi.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ErrorResponse {
+public class ErrorResponseDTO {
 
     public int status;
 

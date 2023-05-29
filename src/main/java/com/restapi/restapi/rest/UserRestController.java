@@ -1,5 +1,6 @@
 package com.restapi.restapi.rest;
 
+import com.restapi.restapi.model.dto.RequestParamDTO;
 import com.restapi.restapi.model.dto.ResponseDTO;
 import com.restapi.restapi.model.dto.UserDTO;
 import com.restapi.restapi.model.entity.User;
@@ -28,17 +29,11 @@ public class UserRestController {
         this.userService = userService;
     }
 
-    //Catch'e gerek yok, global exception handler yazıldı.
-    //Response için dto yazılması gerekli.
     //getAll yerine search metodu yazılmalı. Ve belli kriterlere göre arama yapılmalı.
-    //Pagination için pageable sınıfı kullanılabilir
-    //Request parametreleri için dto yazılmalı.
-    //Swagger ile endpoint dokümantasyonu yapılmalı.
     @GetMapping("")
-    public ResponseEntity<Map<String,Object>> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size){
-        try {
+    public ResponseEntity<Map<String,Object>> getAll(@ModelAttribute RequestParamDTO requestParamDTO){
             List<User> users= new ArrayList<>();
-            Pageable paging= PageRequest.of(page, size);
+            Pageable paging= PageRequest.of(requestParamDTO.getPage(), requestParamDTO.getSize());
             Page<User> pageUser=userService.findAllUser(paging);
             users=pageUser.getContent();
             Map<String,Object> response=new HashMap<>();
@@ -46,11 +41,10 @@ public class UserRestController {
             response.put("currentPage",pageUser.getNumber());
             response.put("totalItems",pageUser.getTotalElements());
             response.put("totalPages",pageUser.getTotalPages());
+
             return new ResponseEntity<>(response,HttpStatus.OK);
 
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
     }
 
 
@@ -60,11 +54,7 @@ public class UserRestController {
         return  new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
     }
 
-    //Başarılı işlemde String döndürmek yerine standart bir body belirlenebilir.
-    // {
-    //   "success": true,
-    //   "message": "İşlem Başarılı"
-    // }
+
     @PostMapping("")
     public ResponseEntity<ResponseDTO> saveUser(@RequestBody User user){
         ResponseDTO responseDTO=new ResponseDTO();
@@ -80,12 +70,16 @@ public class UserRestController {
         }
     }
 
-    //Başarılı işlemde String döndürmek yerine standart bir body belirlenebilir.
     @DeleteMapping("/{userId}")
-    public String deletUser(@PathVariable("userId") int id) {
-        userService.deleteById(id);
-        return "User removed from record";
+    public ResponseEntity<ResponseDTO> deletUser(@PathVariable("userId") int id) {
+        UserDTO user=userService.findById(id);
+        if (!(user==null)){
+            ResponseDTO responseDTO=new ResponseDTO();
+            userService.deleteById(id);
+            responseDTO.setMessage("İşlem Başarılı");
+            responseDTO.setSuccess(true);
+            return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK) ;
+        }
+        return null; // -->>with global execption if the user not found in db the userService throw exception!!!
     }
-
-
 }

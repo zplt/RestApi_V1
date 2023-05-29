@@ -1,6 +1,6 @@
 package com.restapi.restapi.model.dto;
 
-import jakarta.persistence.Column;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
