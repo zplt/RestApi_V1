@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface UserService {
 
-    //Updated with UserDTO
+
     Page<User> findAllUser(Pageable pageable);
 
     UserDTO findById(Integer id);

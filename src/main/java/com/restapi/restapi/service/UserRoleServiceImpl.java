@@ -1,8 +1,13 @@
 package com.restapi.restapi.service;
 
 import com.restapi.restapi.dao.UserRolesRepository;
+import com.restapi.restapi.model.dto.UserRoleDTO;
 import com.restapi.restapi.model.entity.UserRole;
+import com.restapi.restapi.rest.UserNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,27 +17,25 @@ import java.util.Optional;
 public class UserRoleServiceImpl implements UserRoleService {
 
     private UserRolesRepository userRoleService;
+    private ModelMapper modelMapper;
+
 
     @Autowired
-    public UserRoleServiceImpl(UserRolesRepository userRoleService) {
+    public UserRoleServiceImpl(UserRolesRepository userRoleService, ModelMapper modelMapper) {
         this.userRoleService = userRoleService;
+        this.modelMapper=modelMapper;
     }
 
     @Override
-    public List<UserRole> findAllUser() {
-        return userRoleService.findAll();
+    public Page<UserRole> findAllUser(Pageable pageable) {
+        return userRoleService.findAll(pageable);
     }
 
     @Override
-    public UserRole findById(Integer id) {
-        Optional<UserRole> result= userRoleService.findById(id);
-        UserRole theUserRole=null;
-        if (result.isPresent()){
-            theUserRole=result.get();
-        }else  {
-            throw new RuntimeException("User Role Not Found id " + id);
-        }
-        return theUserRole;
+    public UserRoleDTO findById(Integer id) {
+        UserRole userRole= userRoleService.findById(id).orElseThrow(()-> new UserNotFoundException("User Role Not Found id " + id));
+        UserRoleDTO userRoleDTO= modelMapper.map(userRole,UserRoleDTO.class);
+        return userRoleDTO;
     }
 
     @Override

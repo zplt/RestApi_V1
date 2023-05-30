@@ -1,15 +1,17 @@
 package com.restapi.restapi.service;
 
+import com.restapi.restapi.model.dto.UserRoleDTO;
 import com.restapi.restapi.model.entity.UserRole;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 public interface UserRoleService {
 
 
-    List<UserRole> findAllUser();
+    Page<UserRole> findAllUser(Pageable pageable);
 
-    UserRole findById(Integer id);
+    UserRoleDTO findById(Integer id);
 
     UserRole save(UserRole theUser);
 

@@ -2,6 +2,7 @@ package com.restapi.restapi.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,15 +26,22 @@ public class UserRole {
     private String permissions;
     @Column(name = "status")
     private String status;
+
     @Column(name = "level")
     private float level;
     @Column(name = "inserttime")
-    @JsonIgnore
+
     @CreationTimestamp
     private Date inserttime;
     @Column(name = "updatetime")
-    @JsonIgnore
     @UpdateTimestamp
     private Date updatetime;
 
+    public UserRole(int id, String name, String permissions, String status, float level) {
+        this.id = id;
+        this.name = name;
+        this.permissions = permissions;
+        this.status = status;
+        this.level = level;
+    }
 }

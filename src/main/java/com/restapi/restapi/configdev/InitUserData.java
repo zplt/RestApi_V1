@@ -1,6 +1,8 @@
 package com.restapi.restapi.configdev;
 
 import com.restapi.restapi.model.entity.User;
+import com.restapi.restapi.model.entity.UserRole;
+import com.restapi.restapi.service.UserRoleService;
 import com.restapi.restapi.service.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -14,13 +16,15 @@ import java.util.List;
 public class InitUserData {
 
     private UserService userService;
+    private UserRoleService userRoleService;
 
-    public InitUserData(UserService userService) {
+    public InitUserData(UserService userService,UserRoleService userRoleService) {
         this.userService = userService;
+        this.userRoleService=userRoleService;
     }
 
     @PostConstruct
-    public void createUser(){
+    public void createUserAndRoles(){
         List<User> users = new ArrayList<>();
         users.add(new User("H001", 12345, "user1", "pass1", "John", "Doe", 1, "active", "Some attributes 1"));
         users.add(new User("H002", 67890, "user2", "pass2", "Jane", "Smith", 2, "inactive", "Some attributes 2"));
@@ -44,5 +48,15 @@ public class InitUserData {
         for (User u:users) {
             userService.save(u);
         }
+        List<UserRole> userRoles=new ArrayList<>();
+        userRoles.add(new UserRole(1, "ADMIN", "", "active", 1));
+        userRoles.add(new UserRole(2, "BASMUDURLUK VKT", "", "active", 2));
+        userRoles.add(new UserRole(3, "MERKEZ VKT", "", "active", 3));
+        userRoles.add(new UserRole(8, "ÇAĞRI MERKEZİ", "", "active", 10));
+
+        for (UserRole role: userRoles) {
+            userRoleService.save(role);
+        }
+
     }
 }
