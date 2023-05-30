@@ -3,15 +3,12 @@ package com.restapi.restapi.service;
 import com.restapi.restapi.dao.UserRolesRepository;
 import com.restapi.restapi.model.dto.UserRoleDTO;
 import com.restapi.restapi.model.entity.UserRole;
-import com.restapi.restapi.rest.UserNotFoundException;
+import com.restapi.restapi.model.dto.UserNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserRoleServiceImpl implements UserRoleService {

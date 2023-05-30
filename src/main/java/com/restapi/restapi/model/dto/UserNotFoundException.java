@@ -1,4 +1,4 @@
-package com.restapi.restapi.rest;
+package com.restapi.restapi.model.dto;
 
 public class UserNotFoundException extends RuntimeException {
 
