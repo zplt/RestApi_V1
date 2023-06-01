@@ -21,20 +21,3 @@ public class RequestDTO {
 
 }
 
-//PostMan Request Data write in ReadMe file after ...!
-/*
-{
-    "gLobalOperator": "OR",
-
-    "searchRequestDTOs":[
-        {
-            "column":"username",
-            "value":"user16"
-        },
-
-        {
-            "column":"username",
-            "value":"user10"
-        }
-    ]
-}*/

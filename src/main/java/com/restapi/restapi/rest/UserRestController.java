@@ -39,17 +39,28 @@ public class UserRestController {
 
 //Working on Searching method .....!
     @PostMapping("/search")
-    public List<User> searchUser(@RequestBody RequestDTO requestDTO){
-        log.warn(requestDTO.toString());
+    public ResponseEntity<List<UserDTO>> searchUser(@RequestBody RequestDTO requestDTO){
+        List<UserDTO> userDTOs=new ArrayList<>();
         Specification<User> searchSpecification = filterSpecification.getSearchSpecification(requestDTO.getSearchRequestDTOs(),requestDTO.getGLobalOperator());
-        return userService.findAll(searchSpecification);
+        List<User> users= userService.findAll(searchSpecification);
+        for (User u: users) {
+            userDTOs.add(new UserDTO(u.getUsername(),u.getFirstname(),u.getLastname()));
+        }
+        return new ResponseEntity<List<UserDTO>>(userDTOs,HttpStatus.OK);
     }
 
 
 
     @GetMapping("")
     public ResponseEntity<ResponseListDTO> getAll(@ModelAttribute RequestParamDTO requestParamDTO) {
-        Pageable paging = PageRequest.of(requestParamDTO.getPage(), requestParamDTO.getSize());
+        int size;
+        int page= requestParamDTO.getPage();
+        if (requestParamDTO.getSize() == 0){
+            size=3;
+        }else {
+            size= requestParamDTO.getSize();
+        }
+        Pageable paging = PageRequest.of(page,size);
         ResponseListDTO responseListDTO=new ResponseListDTO();
         List<UserDTO> userDTO=new ArrayList<>();
         Page<User> pageUser = userService.findAllUser(paging);
