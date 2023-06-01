@@ -1,4 +1,4 @@
-package com.restapi.restapi.service;
+package com.restapi.restapi.service.userrole;
 
 import com.restapi.restapi.model.dto.UserRoleDTO;
 import com.restapi.restapi.model.entity.UserRole;

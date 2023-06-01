@@ -1,16 +1,20 @@
 package com.restapi.restapi.rest;
 
-import com.restapi.restapi.model.dto.RequestParamDTO;
-import com.restapi.restapi.model.dto.ResponseDTO;
-import com.restapi.restapi.model.dto.ResponseListDTO;
+import com.restapi.restapi.model.dto.request.RequestDTO;
+import com.restapi.restapi.model.dto.request.RequestParamDTO;
+import com.restapi.restapi.model.dto.response.ResponseDTO;
+import com.restapi.restapi.model.dto.response.ResponseListDTO;
 import com.restapi.restapi.model.dto.UserDTO;
 import com.restapi.restapi.model.entity.User;
-import com.restapi.restapi.service.UserService;
+import com.restapi.restapi.service.filter.FilterSpecification;
+import com.restapi.restapi.service.user.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,18 +23,30 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/user")
+@Slf4j
 public class UserRestController {
 
     private UserService userService;
     private ModelMapper modelMapper;
+    private FilterSpecification filterSpecification;
 
     @Autowired
-    public UserRestController(UserService userService,ModelMapper modelMapper) {
+    public UserRestController(UserService userService,ModelMapper modelMapper, FilterSpecification<User> filterSpecification) {
         this.userService = userService;
         this.modelMapper=modelMapper;
+        this.filterSpecification=filterSpecification;
     }
 
-    //getAll yerine search metodu yazılmalı. Ve belli kriterlere göre arama yapılmalı.
+//Working on Searching method .....!
+    @PostMapping("/search")
+    public List<User> searchUser(@RequestBody RequestDTO requestDTO){
+        log.warn(requestDTO.toString());
+        Specification<User> searchSpecification = filterSpecification.getSearchSpecification(requestDTO.getSearchRequestDTOs(),requestDTO.getGLobalOperator());
+        return userService.findAll(searchSpecification);
+    }
+
+
+
     @GetMapping("")
     public ResponseEntity<ResponseListDTO> getAll(@ModelAttribute RequestParamDTO requestParamDTO) {
         Pageable paging = PageRequest.of(requestParamDTO.getPage(), requestParamDTO.getSize());

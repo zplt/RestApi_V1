@@ -2,8 +2,8 @@ package com.restapi.restapi.configdev;
 
 import com.restapi.restapi.model.entity.User;
 import com.restapi.restapi.model.entity.UserRole;
-import com.restapi.restapi.service.UserRoleService;
-import com.restapi.restapi.service.UserService;
+import com.restapi.restapi.service.userrole.UserRoleService;
+import com.restapi.restapi.service.user.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;

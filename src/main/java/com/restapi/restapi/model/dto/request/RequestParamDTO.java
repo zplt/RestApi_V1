@@ -1,4 +1,4 @@
-package com.restapi.restapi.model.dto;
+package com.restapi.restapi.model.dto.request;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.restapi.restapi.model.dto;
+package com.restapi.restapi.model.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

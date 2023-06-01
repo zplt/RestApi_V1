@@ -1,9 +1,11 @@
 package com.restapi.restapi.rest;
 
 import com.restapi.restapi.model.dto.*;
-import com.restapi.restapi.model.entity.User;
+import com.restapi.restapi.model.dto.request.RequestParamDTO;
+import com.restapi.restapi.model.dto.response.ResponseDTO;
+import com.restapi.restapi.model.dto.response.ResponseListDTO;
 import com.restapi.restapi.model.entity.UserRole;
-import com.restapi.restapi.service.UserRoleService;
+import com.restapi.restapi.service.userrole.UserRoleService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

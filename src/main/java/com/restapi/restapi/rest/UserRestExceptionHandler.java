@@ -1,6 +1,6 @@
 package com.restapi.restapi.rest;
 
-import com.restapi.restapi.model.dto.ErrorResponseDTO;
+import com.restapi.restapi.model.dto.response.ErrorResponseDTO;
 import com.restapi.restapi.model.dto.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
